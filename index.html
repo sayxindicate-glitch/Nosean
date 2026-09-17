@@ -32,19 +32,23 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm text-gray-400 mb-1">Lot Size</label>
-                        <input type="number" id="LotSize" step="0.01" value="0.01" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:ring-blue-500 focus:border-blue-500">
+                        <!-- type text digunakan agar javascript bebas membersihkan koma/titik -->
+                        <input type="text" inputmode="decimal" id="LotSize" placeholder="Contoh: 0.01" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500">
+                        <p class="text-xs text-gray-500 mt-1">Gunakan TITIK untuk angka desimal.</p>
                     </div>
                     <div>
                         <label class="block text-sm text-gray-400 mb-1">Jumlah Entry (Layer)</label>
-                        <input type="number" id="NumEntries" step="1" value="1" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="number" id="NumEntries" placeholder="Contoh: 1" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500">
+                        <p class="text-xs text-gray-500 mt-1">Hanya angka bulat (tanpa titik/koma).</p>
                     </div>
                     <div>
                         <label class="block text-sm text-gray-400 mb-1">EMA Period</label>
-                        <input type="number" id="EmaPeriod" step="1" value="200" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="number" id="EmaPeriod" placeholder="Contoh: 200" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500">
                     </div>
                     <div>
                         <label class="block text-sm text-gray-400 mb-1">Magic Number</label>
-                        <input type="number" id="MagicNumber" step="1" value="123456" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="number" id="MagicNumber" placeholder="Contoh: 123456" class="w-full bg-gray-700 border border-gray-600 rounded p-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500">
+                        <p class="text-xs text-gray-500 mt-1">ID Bot (Jangan diubah jika bot sedang jalan).</p>
                     </div>
                 </div>
             </div>
@@ -61,11 +65,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm text-gray-400 mb-1">Stop Loss ($) - Isi 0 jika off</label>
-                        <input type="number" id="StopLossUSD" step="0.1" value="10.0" class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-red-400 focus:ring-red-500 focus:border-red-500">
+                        <input type="text" inputmode="decimal" id="StopLossUSD" placeholder="Contoh: 10.5" class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-red-400 focus:ring-red-500 focus:border-red-500 placeholder-gray-500">
+                        <p class="text-xs text-gray-500 mt-1">Mata uang dolar. Cth: 10 untuk $10, atau 10.5 untuk $10.50</p>
                     </div>
                     <div>
                         <label class="block text-sm text-gray-400 mb-1">Take Profit ($) - Isi 0 jika off</label>
-                        <input type="number" id="TakeProfitUSD" step="0.1" value="100.0" class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-green-400 focus:ring-green-500 focus:border-green-500">
+                        <input type="text" inputmode="decimal" id="TakeProfitUSD" placeholder="Contoh: 100" class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-green-400 focus:ring-green-500 focus:border-green-500 placeholder-gray-500">
                     </div>
                 </div>
             </div>
@@ -85,25 +90,25 @@
                     <div class="text-sm text-gray-400 font-semibold">Kunci Sisa Profit di ($)</div>
                     
                     <!-- L1 -->
-                    <input type="number" id="TS_Trigger1" step="0.1" value="10.0" class="bg-gray-700 border border-gray-600 rounded p-2">
-                    <input type="number" id="TS_Lock1" step="0.1" value="2.0" class="bg-gray-700 border border-gray-600 rounded p-2">
+                    <input type="text" inputmode="decimal" id="TS_Trigger1" placeholder="Cth: 10" class="bg-gray-700 border border-gray-600 rounded p-2 placeholder-gray-500">
+                    <input type="text" inputmode="decimal" id="TS_Lock1" placeholder="Cth: 2" class="bg-gray-700 border border-gray-600 rounded p-2 placeholder-gray-500">
                     <!-- L2 -->
-                    <input type="number" id="TS_Trigger2" step="0.1" value="20.0" class="bg-gray-700 border border-gray-600 rounded p-2">
-                    <input type="number" id="TS_Lock2" step="0.1" value="10.0" class="bg-gray-700 border border-gray-600 rounded p-2">
+                    <input type="text" inputmode="decimal" id="TS_Trigger2" placeholder="Cth: 20" class="bg-gray-700 border border-gray-600 rounded p-2 placeholder-gray-500">
+                    <input type="text" inputmode="decimal" id="TS_Lock2" placeholder="Cth: 10" class="bg-gray-700 border border-gray-600 rounded p-2 placeholder-gray-500">
                     <!-- L3 -->
-                    <input type="number" id="TS_Trigger3" step="0.1" value="30.0" class="bg-gray-700 border border-gray-600 rounded p-2">
-                    <input type="number" id="TS_Lock3" step="0.1" value="20.0" class="bg-gray-700 border border-gray-600 rounded p-2">
+                    <input type="text" inputmode="decimal" id="TS_Trigger3" placeholder="Cth: 30" class="bg-gray-700 border border-gray-600 rounded p-2 placeholder-gray-500">
+                    <input type="text" inputmode="decimal" id="TS_Lock3" placeholder="Cth: 20" class="bg-gray-700 border border-gray-600 rounded p-2 placeholder-gray-500">
                     <!-- L4 -->
-                    <input type="number" id="TS_Trigger4" step="0.1" value="40.0" class="bg-gray-700 border border-gray-600 rounded p-2">
-                    <input type="number" id="TS_Lock4" step="0.1" value="30.0" class="bg-gray-700 border border-gray-600 rounded p-2">
+                    <input type="text" inputmode="decimal" id="TS_Trigger4" placeholder="Cth: 40" class="bg-gray-700 border border-gray-600 rounded p-2 placeholder-gray-500">
+                    <input type="text" inputmode="decimal" id="TS_Lock4" placeholder="Cth: 30" class="bg-gray-700 border border-gray-600 rounded p-2 placeholder-gray-500">
                     <!-- L5 -->
-                    <input type="number" id="TS_Trigger5" step="0.1" value="50.0" class="bg-gray-700 border border-gray-600 rounded p-2">
-                    <input type="number" id="TS_Lock5" step="0.1" value="40.0" class="bg-gray-700 border border-gray-600 rounded p-2">
+                    <input type="text" inputmode="decimal" id="TS_Trigger5" placeholder="Cth: 50" class="bg-gray-700 border border-gray-600 rounded p-2 placeholder-gray-500">
+                    <input type="text" inputmode="decimal" id="TS_Lock5" placeholder="Cth: 40" class="bg-gray-700 border border-gray-600 rounded p-2 placeholder-gray-500">
                 </div>
             </div>
 
             <!-- Action Button -->
-            <div class="flex items-center justify-end space-x-4">
+            <div class="flex items-center justify-end space-x-4 mt-6">
                 <span id="statusMsg" class="text-sm text-green-400 hidden">✓ Pengaturan berhasil disimpan ke Cloudflare!</span>
                 <span id="errorMsg" class="text-sm text-red-400 hidden">✗ Gagal menyimpan data!</span>
                 <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-colors">
@@ -116,6 +121,25 @@
     <script>
         const WORKER_URL = "https://nosean-still-learning.sayxindicate.workers.dev";
 
+        // FUNGSI PEMBERSIH ANGKA (Anti Koma & Anti Spasi Kosong)
+        // Jika input kosong atau salah, otomatis jadi 0
+        const safeFloat = (id) => {
+            let val = document.getElementById(id).value;
+            if (!val) return 0.0;
+            // Ubah koma jadi titik, hapus spasi, lalu jadikan format angka (Float)
+            val = val.replace(/,/g, '.').replace(/\s/g, ''); 
+            let parsed = parseFloat(val);
+            return isNaN(parsed) ? 0.0 : parsed;
+        };
+
+        const safeInt = (id) => {
+            let val = document.getElementById(id).value;
+            if (!val) return 0;
+            val = val.replace(/\s/g, ''); // Hapus spasi
+            let parsed = parseInt(val, 10);
+            return isNaN(parsed) ? 0 : parsed;
+        };
+
         // Fungsi Auto-Load saat halaman dibuka
         window.addEventListener('DOMContentLoaded', async () => {
             try {
@@ -123,7 +147,6 @@
                 if (response.ok) {
                     const data = await response.json();
                     
-                    // Jika data sudah ada di KV, masukkan ke dalam input form
                     if (Object.keys(data).length > 0) {
                         document.getElementById('IsBotActive').checked = data.IsBotActive;
                         document.getElementById('LotSize').value = data.LotSize;
@@ -157,28 +180,31 @@
         document.getElementById('botSettingsForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            // Mengambil dan membersihkan data otomatis
             const configData = {
                 IsBotActive: document.getElementById('IsBotActive').checked,
-                LotSize: parseFloat(document.getElementById('LotSize').value),
-                NumEntries: parseInt(document.getElementById('NumEntries').value),
-                EmaPeriod: parseInt(document.getElementById('EmaPeriod').value),
-                MagicNumber: parseInt(document.getElementById('MagicNumber').value),
+                
+                // Gunakan fungsi pembersih
+                LotSize: safeFloat('LotSize'),
+                NumEntries: safeInt('NumEntries'),
+                EmaPeriod: safeInt('EmaPeriod'),
+                MagicNumber: safeInt('MagicNumber'),
                 
                 UseVirtualSLTP: document.getElementById('UseVirtualSLTP').checked,
-                StopLossUSD: parseFloat(document.getElementById('StopLossUSD').value),
-                TakeProfitUSD: parseFloat(document.getElementById('TakeProfitUSD').value),
+                StopLossUSD: safeFloat('StopLossUSD'),
+                TakeProfitUSD: safeFloat('TakeProfitUSD'),
                 
                 UseTrailing: document.getElementById('UseTrailing').checked,
-                TS_Trigger1: parseFloat(document.getElementById('TS_Trigger1').value),
-                TS_Lock1: parseFloat(document.getElementById('TS_Lock1').value),
-                TS_Trigger2: parseFloat(document.getElementById('TS_Trigger2').value),
-                TS_Lock2: parseFloat(document.getElementById('TS_Lock2').value),
-                TS_Trigger3: parseFloat(document.getElementById('TS_Trigger3').value),
-                TS_Lock3: parseFloat(document.getElementById('TS_Lock3').value),
-                TS_Trigger4: parseFloat(document.getElementById('TS_Trigger4').value),
-                TS_Lock4: parseFloat(document.getElementById('TS_Lock4').value),
-                TS_Trigger5: parseFloat(document.getElementById('TS_Trigger5').value),
-                TS_Lock5: parseFloat(document.getElementById('TS_Lock5').value),
+                TS_Trigger1: safeFloat('TS_Trigger1'),
+                TS_Lock1: safeFloat('TS_Lock1'),
+                TS_Trigger2: safeFloat('TS_Trigger2'),
+                TS_Lock2: safeFloat('TS_Lock2'),
+                TS_Trigger3: safeFloat('TS_Trigger3'),
+                TS_Lock3: safeFloat('TS_Lock3'),
+                TS_Trigger4: safeFloat('TS_Trigger4'),
+                TS_Lock4: safeFloat('TS_Lock4'),
+                TS_Trigger5: safeFloat('TS_Trigger5'),
+                TS_Lock5: safeFloat('TS_Lock5'),
             };
 
             const btn = document.querySelector('button[type="submit"]');
@@ -191,7 +217,6 @@
             errorMsg.classList.add('hidden');
 
             try {
-                // Eksekusi POST ke Cloudflare Worker
                 const response = await fetch(WORKER_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -200,6 +225,12 @@
                 
                 if(response.ok) {
                     statusMsg.classList.remove('hidden');
+                    
+                    // Kembalikan nilai yang sudah bersih ke kotak input agar user melihatnya
+                    document.getElementById('LotSize').value = configData.LotSize;
+                    document.getElementById('StopLossUSD').value = configData.StopLossUSD;
+                    document.getElementById('TakeProfitUSD').value = configData.TakeProfitUSD;
+                    
                     setTimeout(() => statusMsg.classList.add('hidden'), 3000);
                 } else {
                     errorMsg.classList.remove('hidden');
