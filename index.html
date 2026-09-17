@@ -105,6 +105,7 @@
             <!-- Action Button -->
             <div class="flex items-center justify-end space-x-4">
                 <span id="statusMsg" class="text-sm text-green-400 hidden">✓ Pengaturan berhasil disimpan ke Cloudflare!</span>
+                <span id="errorMsg" class="text-sm text-red-400 hidden">✗ Gagal menyimpan data!</span>
                 <button type="submit" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-colors">
                     SIMPAN PENGATURAN (PUSH TO KV)
                 </button>
@@ -113,13 +114,49 @@
     </div>
 
     <script>
-        // Nanti URL ini akan diganti dengan URL Cloudflare Worker asli milik Anda
         const WORKER_URL = "https://nosean-still-learning.sayxindicate.workers.dev";
 
+        // Fungsi Auto-Load saat halaman dibuka
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch(WORKER_URL);
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Jika data sudah ada di KV, masukkan ke dalam input form
+                    if (Object.keys(data).length > 0) {
+                        document.getElementById('IsBotActive').checked = data.IsBotActive;
+                        document.getElementById('LotSize').value = data.LotSize;
+                        document.getElementById('NumEntries').value = data.NumEntries;
+                        document.getElementById('EmaPeriod').value = data.EmaPeriod;
+                        document.getElementById('MagicNumber').value = data.MagicNumber;
+                        
+                        document.getElementById('UseVirtualSLTP').checked = data.UseVirtualSLTP;
+                        document.getElementById('StopLossUSD').value = data.StopLossUSD;
+                        document.getElementById('TakeProfitUSD').value = data.TakeProfitUSD;
+                        
+                        document.getElementById('UseTrailing').checked = data.UseTrailing;
+                        document.getElementById('TS_Trigger1').value = data.TS_Trigger1;
+                        document.getElementById('TS_Lock1').value = data.TS_Lock1;
+                        document.getElementById('TS_Trigger2').value = data.TS_Trigger2;
+                        document.getElementById('TS_Lock2').value = data.TS_Lock2;
+                        document.getElementById('TS_Trigger3').value = data.TS_Trigger3;
+                        document.getElementById('TS_Lock3').value = data.TS_Lock3;
+                        document.getElementById('TS_Trigger4').value = data.TS_Trigger4;
+                        document.getElementById('TS_Lock4').value = data.TS_Lock4;
+                        document.getElementById('TS_Trigger5').value = data.TS_Trigger5;
+                        document.getElementById('TS_Lock5').value = data.TS_Lock5;
+                    }
+                }
+            } catch (error) {
+                console.error("Belum ada data di KV atau terjadi kesalahan jaringan.", error);
+            }
+        });
+
+        // Fungsi menyimpan data saat tombol ditekan
         document.getElementById('botSettingsForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Mengambil semua nilai dari form
             const configData = {
                 IsBotActive: document.getElementById('IsBotActive').checked,
                 LotSize: parseFloat(document.getElementById('LotSize').value),
@@ -146,30 +183,29 @@
 
             const btn = document.querySelector('button[type="submit"]');
             const statusMsg = document.getElementById('statusMsg');
+            const errorMsg = document.getElementById('errorMsg');
             
             btn.innerText = "MENYIMPAN...";
             btn.classList.add('opacity-50', 'cursor-not-allowed');
+            statusMsg.classList.add('hidden');
+            errorMsg.classList.add('hidden');
 
             try {
-                /* 
-                Bagian ini masih dikomentari sampai kita membuat Worker-nya
-                
+                // Eksekusi POST ke Cloudflare Worker
                 const response = await fetch(WORKER_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(configData)
                 });
-                */
-
-                // Simulasi delay jaringan (hapus ini saat sudah pakai API asli)
-                await new Promise(r => setTimeout(r, 1000));
                 
-                console.log("Data yang akan dikirim ke Cloudflare KV:", JSON.stringify(configData, null, 2));
-                
-                statusMsg.classList.remove('hidden');
-                setTimeout(() => statusMsg.classList.add('hidden'), 3000);
+                if(response.ok) {
+                    statusMsg.classList.remove('hidden');
+                    setTimeout(() => statusMsg.classList.add('hidden'), 3000);
+                } else {
+                    errorMsg.classList.remove('hidden');
+                }
             } catch (error) {
-                alert("Gagal menyimpan data!");
+                errorMsg.classList.remove('hidden');
                 console.error(error);
             } finally {
                 btn.innerText = "SIMPAN PENGATURAN (PUSH TO KV)";
